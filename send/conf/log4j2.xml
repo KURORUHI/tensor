@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG" packages="com.pshc.log">
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT" direct="true" immediateFlush="false">
+			<PatternLayout
+				pattern="%d{yy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		<RollingFile name="File" fileName="logs/application.log"
+			filePattern="logs/application.%i.%d{yyyy-MM-dd}.log" immediateFlush="false"
+			append="true">
+			<PatternLayout
+				pattern="%d{yy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="500KB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingFile>
+		<CustomLogAppender name="CustomLA">
+			<PatternLayout
+				pattern="%d{yy-MM-dd HH:mm:ss} [%t] %n%-5level %logger{36} - %msg%n" />
+		</CustomLogAppender>
+	</Appenders>
+	<Loggers>
+	<!-- 
+	<Root level="ALL">
+	 -->
+		<Root level="Debug">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="File" />
+			<AppenderRef ref="CustomLA" />
+		</Root>
+
+		<Logger name="org.apache.http" level="INFO">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="File" />
+			<AppenderRef ref="CustomLA" />
+		</Logger>
+		
+		<Logger name="org.dcm4che3.net.Association" level="DEBUG">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="File" />
+			<AppenderRef ref="CustomLA" />
+		</Logger>
+		
+		<Logger name="org.dcm4che3.net.Dimse" level="DEBUG">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="File" />
+			<AppenderRef ref="CustomLA" />
+		</Logger>
+		
+		<Logger name="org.dcm4che3.net.Timeout" level="DEBUG">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="File" />
+			<AppenderRef ref="CustomLA" />
+		</Logger>
+
+	</Loggers>
+	
+</Configuration>
